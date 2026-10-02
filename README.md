@@ -31,9 +31,9 @@ Data retrieved:
 Data retrieved include username, level, and score for gameplay progression.
 
 Unfinished Parts (For further prototypes):
-Game Mechanics/Features
-User Interface
-Assets
+Game Mechanics/Features<br>
+User Interface<br>
+Assets<br>
 Proper error handling
 
 
