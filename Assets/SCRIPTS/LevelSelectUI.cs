@@ -11,6 +11,11 @@ public class LevelSelectUI : MonoBehaviour
     [SerializeField] private Button[] levelButtons;
     [SerializeField] private TMP_Text infoText;
 
+    [Header("Player Info (optional)")]
+    [SerializeField] private TMP_Text playerNameText;
+    [SerializeField] private TMP_Text levelText;
+    [SerializeField] private TMP_Text scoreText;
+
     [Header("Settings")]
     [Tooltip("Scene to load for each button. Element 0 = first button, and so on.")]
     [SerializeField] private string[] levelScenes = { "Level1", "Level2", "Level3" };
@@ -42,15 +47,21 @@ public class LevelSelectUI : MonoBehaviour
             levelButtons[i].onClick.AddListener(() => SelectLevel(level));
         }
 
-        // Show the player's last selected level
+        
         DatabaseManager.Instance.LoadPlayerData(uid, data =>
         {
-            string name = AuthManager.Instance.CurrentUser.DisplayName;
-            if (data != null)
-                SetInfo("Welcome, " + name + "!\nLast level: " + data.level + "\nChoose a level:");
-            else
-                SetInfo("Welcome, " + name + "!\nChoose a level:");
+            
+            string name = (data != null && !string.IsNullOrEmpty(data.playerName))
+                ? data.playerName
+                : AuthManager.Instance.CurrentUser.DisplayName;
+            int level = data != null ? data.level : 1;
+            int score = data != null ? data.score : 0;
 
+            if (playerNameText != null) playerNameText.text = "Player: " + name;
+            if (levelText != null) levelText.text = "Current Level: " + level;
+            if (scoreText != null) scoreText.text = "Current Score: " + score;
+
+            SetInfo("Choose a level:");
             SetButtonsInteractable(true);
         });
     }

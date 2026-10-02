@@ -12,8 +12,8 @@ public class PlayerData
     public string playerName;
     public int score;
     public int level;
-    public long registeredAt; // Unix time in milliseconds (set by the server)
-    public string registeredAtText; // Readable version, e.g. "Oct 02, 2026  12:16:11 PM (UTC+08:00)"
+    public long registeredAt; 
+    public string registeredAtText; 
 
     public DateTime RegisteredDate =>
         DateTimeOffset.FromUnixTimeMilliseconds(registeredAt).LocalDateTime;
@@ -23,7 +23,7 @@ public class DatabaseManager : MonoBehaviour
 {
     public static DatabaseManager Instance { get; private set; }
 
-    // Your Realtime Database URL (copy it from the Firebase console, Data tab)
+    
     [SerializeField] private string databaseUrl = "https://tlw-databasetest-default-rtdb.asia-southeast1.firebasedatabase.app";
 
     private DatabaseReference dbRef;
@@ -60,7 +60,7 @@ public class DatabaseManager : MonoBehaviour
         });
     }
 
-    // Call once when an account is first created.
+   
     public void CreatePlayer(string userId, string username)
     {
         if (!IsReady) { Debug.LogWarning("Firebase not ready yet"); return; }
@@ -70,7 +70,7 @@ public class DatabaseManager : MonoBehaviour
             { "playerName", username },
             { "score", 0 },
             { "level", 1 },
-            { "registeredAt", ServerValue.Timestamp } // filled in by Firebase's server
+            { "registeredAt", ServerValue.Timestamp } 
         };
 
         dbRef.Child("players").Child(userId).SetValueAsync(data)
@@ -85,8 +85,7 @@ public class DatabaseManager : MonoBehaviour
             });
     }
 
-    // Reads back the server's timestamp and stores a human-readable
-    // version next to it (date + time + timezone offset).
+    
     private void WriteReadableRegistrationTime(string userId)
     {
         DatabaseReference userRef = dbRef.Child("players").Child(userId);
@@ -105,7 +104,7 @@ public class DatabaseManager : MonoBehaviour
         });
     }
 
-    // Updates only these fields, so registeredAt is never overwritten.
+    
     public void SavePlayerData(string userId, PlayerData data)
     {
         if (!IsReady) { Debug.LogWarning("Firebase not ready yet"); return; }
@@ -125,7 +124,6 @@ public class DatabaseManager : MonoBehaviour
             });
     }
 
-    // Saves the chosen level (and resets the score for it). onDone(true) when saved.
     public void SetLevel(string userId, int level, int startingScore, Action<bool> onDone)
     {
         if (!IsReady) { onDone?.Invoke(false); return; }
@@ -151,8 +149,7 @@ public class DatabaseManager : MonoBehaviour
             });
     }
 
-    // Saves the score for ONE level, e.g. levelScores/level_2 = 690.
-    // Other levels' scores are left untouched.
+    
     public void SaveLevelScore(string userId, int level, int score, Action<bool> onDone)
     {
         if (!IsReady) { onDone?.Invoke(false); return; }
