@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "686997664811",
+    "project_id": "tlw-databasetest",
+    "storage_bucket": "tlw-databasetest.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686997664811:android:777cc5657d07ddf9aba66e",
+        "android_client_info": {
+          "package_name": "com.IT26.TLW"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjxowTLwWgnv4w9YBn-Ch7MKrYfVQjCV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
