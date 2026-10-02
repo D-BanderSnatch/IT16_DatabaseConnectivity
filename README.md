@@ -30,8 +30,7 @@ Data saved includes email, username, level, score, and time registered. Email wi
 Data retrieved:
 Data retrieved include username, level, and score for gameplay progression.
 
-Unfinished Parts (For further prototypes)
-
+Unfinished Parts (For further prototypes):
 Game Mechanics/Features
 User Interface
 Assets
